@@ -1,0 +1,276 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<openerp>
+    <data>
+		<!--工人模型视图，tree与form两种视图-->
+		<record id='fac_worker_tree' model='ir.ui.view'>
+			<field name='name'>fac.worker.tree</field>
+			<field name='model'>fac.worker</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='工人'>
+					<field name='name' />
+                    <field name='gender' />
+					<field name='person_id' />
+					<field name='phone' />
+					<field name='entry_date' />
+                    <field name='skills' />
+                    <field name='product_id' />
+				</tree>
+			</field>
+		</record>
+
+        <record id='fac_worker_form' model='ir.ui.view'>
+			<field name='name'>fac.worker.form</field>
+			<field name='model'>fac.worker</field>
+			<field name='type'>form</field>
+			<field name='arch' type='xml'>
+				<form string='工人'>
+					<group>
+						<group>
+							<field name='name' />
+						</group>
+						<group>
+							<field name='gender' />
+						</group>
+                        <group>
+						    <field name='person_id' />
+					    </group>
+                        <group>
+						    <field name='phone' />
+					    </group>
+                        <group>
+						    <field name='entry_date' />
+					    </group>
+					</group>
+					<group string='技能'>
+						<field name='skills' />
+					</group>
+					<group string='产品'>
+						<field name='product_id' />
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<!--组长模型视图，tree与form两种视图，tree视图继承工人模型视图-->
+		<record  id="fac_leader_tree" model="ir.ui.view">
+			<field name="name">fac.leader.tree</field>
+			<field name="model">fac.leader</field>
+			<field name="inherit_id" ref="fac_worker_tree" />
+			<field name="arch" type="xml">
+				<field name='skills' position="replace" />
+				<field name='product_id' position="replace" />
+				<field name='name' position="before">
+					<field name='number' />
+				</field>
+				<xpath expr="//field[@name='name']" position="before">
+					<field name="degree"/>
+				</xpath>
+			</field>
+		</record>
+
+		<!--<record id='fac_leader_tree' model='ir.ui.view'>-->
+			<!--<field name='name'>fac.leader.tree</field>-->
+			<!--<field name='model'>fac.leader</field>-->
+			<!--<field name='type'>tree</field>-->
+			<!--<field name='arch' type='xml'>-->
+				<!--<tree string='组长'>-->
+					<!--<field name='name' />-->
+                    <!--<field name='gender' />-->
+					<!--<field name='person_id' />-->
+					<!--<field name='phone' />-->
+                    <!--<field name='entry_date' />-->
+				<!--</tree>-->
+			<!--</field>-->
+		<!--</record>-->
+
+        <record id='fac_leader_form' model='ir.ui.view'>
+			<field name='name'>fac.leader.form</field>
+			<field name="model">fac.leader</field>
+			<field name="inherit_id" ref="fac_worker_form" />
+			<field name="arch" type="xml">
+				<field name='skills' position="replace" />
+				<field name='product_id' position="replace" />
+				<field name='name' position="before">
+					<field name='number' />
+				</field>
+				<xpath expr="//field[@name='gender']" position="after">
+					<field name="degree"/>
+				</xpath>
+			</field>
+		</record>
+
+		<!--技能模型视图，tree与form两种视图-->
+        <record id='fac_skills_form' model='ir.ui.view'>
+			<field name='name'>fac.skills.form</field>
+			<field name='model'>fac.skills</field>
+			<field name='type'>form</field>
+			<field name='arch' type='xml'>
+				<form string='技能'>
+					<group>
+						<field name='name' />
+						<field name='category' />
+						<field name='degree' />
+						<field name='state' />
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record id='fac_skills_tree' model='ir.ui.view'>
+			<field name='name'>fac.skills.tree</field>
+			<field name='model'>fac.skills</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='技能'>
+					<field name='name' />
+					<field name='category' />
+					<field name='degree' />
+					<field name='state' />
+				</tree>
+			</field>
+		</record>
+
+		<!--技能组模型视图，tree与form两种视图-->
+		<record id='fac_ski_group_tree' model='ir.ui.view'>
+			<field name='name'>fac.ski.group.tree</field>
+			<field name='model'>fac.ski.group</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='技能组'>
+					<field name='name' />
+					<field name='child_skills' />
+				</tree>
+			</field>
+		</record>
+
+        <record id='fac_ski_group_form' model='ir.ui.view'>
+			<field name='name'>fac.ski.group.form</field>
+			<field name='model'>fac.ski.group</field>
+			<field name='type'>form</field>
+			<field name='arch' type='xml'>
+				<form string='技能组'>
+					<group>
+						<group>
+							<field name='name' />
+							<field name='child_skills' />
+						</group>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<!--产品模型视图，tree与form两种视图-->
+        <record id='fac_product_form' model='ir.ui.view'>
+			<field name='name'>fac.product.form</field>
+			<field name='model'>fac.product</field>
+			<field name='type'>form</field>
+			<field name='arch' type='xml'>
+				<form string='产品'>
+					<header>
+						<button name='requirement_send' type='workflow' string='开始制定' class='oe_highlight' states='requirement' />
+						<button name='plan_send' type='workflow' string='提交审核' class='oe_highlight' states='plan' />
+						<button name='1th_approved_send' type='workflow' string='继续提交审核' class='oe_highlight' states='1th_approved' />
+						<button name='2th_approved_send' type='workflow' string='批准开工' class='oe_highlight' states='2th_approved' />
+						<button name='start_send' type='workflow' string='正式开工' class='oe_highlight' states='start' />
+						<button name='finished_send' type='workflow' string='验收入库' class='oe_highlight' states='finished' />
+						<button name='write_pro_database' type='object' string='数据存入' class='oe_highlight' states='finished' confirm="你确定吗?"/>
+						<!--<button name='%(training_register_action)' type='action' string='报名' class='oe_highlight' states='done' context="{'is_in_lesson': True}" />-->
+						<field name='state' widget='statusbar' />
+					</header>
+					<sheet>
+						<group string="产品资料">
+							<field name='name' />
+						</group>
+						<group>
+							<group string="生产周期">
+								<field name='start_date' />
+								<field name='end_date' />
+								<field name='continue_days' />
+							</group>
+							<group string="完成情况">
+								<field name='everyday_percent' />
+								<field name='plan_days' />
+							</group>
+						</group>
+						<group string="产品制作信息">
+							<field name='pro_worker' />
+							<field name='pro_ski_group' />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id='fac_product_tree' model='ir.ui.view'>
+			<field name='name'>fac.product.tree</field>
+			<field name='model'>fac.product</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='产品'>
+					<field name='name' />
+					<field name='pro_worker' />
+					<field name='child_ski' />
+					<field name='pro_ski_group' />
+                    <field name='start_date' />
+					<field name='end_date' />
+					<field name='continue_days' />
+					<field name='everyday_percent' />
+					<field name='plan_days' />
+					<field name='state' />
+				</tree>
+			</field>
+		</record>
+
+		<!--action动作视图-->
+        <record id='fac_worker_action' model='ir.actions.act_window'>
+			<field name='name'>工人</field>
+			<field name='res_model'>fac.worker</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree,form</field>
+			<field name='view_id' ref='fac_worker_tree' />
+		</record>
+
+        <record id='fac_leader_action' model='ir.actions.act_window'>
+			<field name='name'>组长</field>
+			<field name='res_model'>fac.leader</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree,form</field>
+			<field name='view_id' ref='fac_leader_tree' />
+		</record>
+
+        <record id='fac_skills_action' model='ir.actions.act_window'>
+			<field name='name'>技能</field>
+			<field name='res_model'>fac.skills</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>form,tree</field>
+			<field name='view_id' ref='fac_skills_tree' />
+		</record>
+
+        <record id='fac_ski_group_action' model='ir.actions.act_window'>
+			<field name='name'>技能组</field>
+			<field name='res_model'>fac.ski.group</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>form,tree</field>
+			<field name='view_id' ref='fac_ski_group_tree' />
+		</record>
+
+		<record id='fac_product_action' model='ir.actions.act_window'>
+			<field name='name'>产品</field>
+			<field name='res_model'>fac.product</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>form,tree</field>
+			<field name='view_id' ref='fac_product_tree' />
+		</record>
+
+		<!--菜单视图-->
+		<menuitem id='factory_root' name='工厂' />
+		<menuitem id='fac_worker_root' name='工厂管理' parent='factory_root' />
+		<menuitem id='fac_worker_menu' name='工人' parent='fac_worker_root' action='fac_worker_action' />
+		<menuitem id='fac_leader_menu' name='组长' parent='fac_worker_root' action='fac_leader_action' />
+		<menuitem id='fac_skills_menu' name='技能' parent='fac_worker_root' action='fac_skills_action' />
+		<menuitem id='fac_ski_group_menu' name='技能组' parent='fac_worker_root' action='fac_ski_group_action' />
+		<menuitem id='fac_product_menu' name='产品' parent='fac_worker_root' action='fac_product_action' />
+
+    </data>
+</openerp>

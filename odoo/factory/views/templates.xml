@@ -1,0 +1,39 @@
+<openerp>
+    <data>
+        <template id="index">
+            <t t-call="website.layout">
+                <t t-set="title">Factory</t>
+                <div class="oe_structure">
+                    <div class="container">
+                        <p>工人姓名</p>
+                        <t t-foreach="workers" t-as="worker">
+                            <p><a t-attf-href="/factory/{{ slug(worker) }}">
+                              <t t-esc="worker.name"/></a>
+                            </p>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+		<template id="worker">
+            <t t-call="website.layout">
+                <t t-set="title">Factory</t>
+                <div class="oe_structure"/>
+                <div class="oe_structure">
+                    <div class="container">
+                        <h3>工人信息</h3>
+						<div t-field="person.name"/>
+                        <div t-field="person.person_id"/>
+                        <div t-field="person.gender"/>
+                        <div t-field="person.phone"/>
+                        <div t-field="person.entry_date"/>
+                        <div t-field="person.skills"/>
+                        <div t-field="person.product_id"/>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+            </t>
+        </template>
+    </data>
+</openerp>

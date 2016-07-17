@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="just_common_user" model="res.groups">
+    <field name="name">it just common user</field>
+    <field name="category_id" ref="module_fac_product"/>
+    <field name="users" eval="[(4, ref('base.user_root'))]"/> //把admin用户加入该组中
+    </record>
+
+    <!--<record id="factory_designer_view" model="ir.rule">-->
+        <!--<field name="name">factory_designer: global view</field>-->
+        <!--<field name="model_id" ref="base.model_ir_ui_view"/>-->
+        <!--&lt;!&ndash;<field name="domain_force">[('type', '!=', 'qweb')]</field>&ndash;&gt;-->
+        <!--<field name="groups" eval="[(4, ref('base.group_res'))]"/>-->
+        <!--<field name="perm_read" eval="True"/>-->
+        <!--<field name="perm_write" eval="False"/>-->
+        <!--<field name="perm_create" eval="False"/>-->
+        <!--<field name="perm_unlink" eval="False"/>-->
+    <!--</record>-->
+</data>
+</openerp>

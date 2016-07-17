@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_factory_fac_worker,factory,factory.model_fac_worker,,1,1,1,1
+access_factory_fac_leader,factory,factory.model_fac_leader,,1,1,1,1
+access_factory_fac_skills,factory,factory.model_fac_skills,,1,1,1,1
+access_factory_fac_ski_group,factory,factory.model_fac_ski_group,,1,1,1,1
+access_factory_product,factory,factory.model_fac_product,,1,1,1,1

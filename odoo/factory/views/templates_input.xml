@@ -1,0 +1,43 @@
+<openerp>
+    <data>
+     <template id="assets_frontend" name="factory_js" inherit_id="website.assets_frontend">
+         <xpath expr="." position="inside">
+             <script type="text/javascript" src="/factory/static/src/js/factory_demo.js" />
+         </xpath>
+     </template>
+
+
+     <template id="inputer">
+     	<t t-call="website.layout">
+		<t t-set="additional_title">数据搜索</t>
+		<h1>请填写需要搜索人员信息</h1>
+	  	<form action="/factory/check/"  method="POST" >
+          <div class="container" style="width: 100%;">
+            <p>姓名：<input type="text" id="fullname" name="fullname" /></p>
+            <p>身份证号：<input type="text" id="person_id" name="person_id" /></p>
+			<p>
+                <button type="action" class="btn-factory-continue" >提交</button>
+            </p>
+		  </div>
+ 		</form>
+ 		</t>
+     </template>
+
+     <template id="add">
+     	<t t-call="website.layout">
+		<t t-set="additional_title">信息输入</t>
+			<h1>请填写新增人员的信息</h1>
+	  	<form action="/"  method="POST" >
+          <div class="container" style="width: 100%;">
+            <p>姓名：<input type="text" id="fullname1" name="fullname1" /></p>
+            <p>身份证号：<input type="text" id="person_id1" name="person_id1" /></p>
+            <p>
+                <button class="btn-factory-add" type="action" id="add" >保存</button>
+            </p>
+          </div>
+ 		</form>
+ 		</t>
+     </template>
+
+    </data>
+</openerp>

@@ -1,0 +1,14 @@
+﻿<?xml version='1.0' encoding='utf-8' ?>
+<openerp>
+	<data>
+		<report
+			id='report_training_lesson'
+			model='training.lesson'
+			report_type='qweb-pdf'
+			string='打印课程'
+			menu='False'
+			name='sincere_training.report_lesson'
+			file='sincere_training.report_lesson'
+			/>
+	</data>
+</openerp>
