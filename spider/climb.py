@@ -36,3 +36,4 @@ def getImg(html):
 html = getHtml("http://tieba.baidu.com/p/3302953104")
 
 getImg(html)
+#开始抓图啦~
