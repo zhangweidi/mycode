@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言板</title>
+</head>
+<body>
+    <h1>留言板</h1>
+    <form action="{% url 'list' %}" method="post">
+        {% csrf_token %}
+        <textarea name="post_data" placeholder="what do you want to write?" cols="100"  rows="5" required></textarea>
+        <button type="submit">提交</button>
+    </form>
+
+    <table>
+        {% for i in post_list %}
+        <tr><td><a href="{% url 'post'  i.id %}">{{ forloop.counter }}: {{ i }}</a></td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
